@@ -1,0 +1,30 @@
+name: salma_proj1
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.13.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^8.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/saFlag.png
+    - assets/360_F_546176788_hK2bMAyjAYfkW6l37MynkXedIJ8NDNDl.jpg
+    - assets/jeddah-corniche-red-sea-saudi-arabia-d6ub_b.jpeg
+    - assets/our-habitas-alula-al-ula-pic-32.jpg
+    - assets/Kingdom-Centre-Riyadh-Saudi-Arabia.webp
+    - assets/b220510003___banner-size_1606_786.jpg
+    
+
