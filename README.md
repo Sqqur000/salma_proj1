@@ -3,7 +3,7 @@
 
 # Explore Saudi is a mobile tourism application built with Flutter, designed to help users discover the diverse beauty of Saudi Arabia.
 
-From the ancient heritage of AlUla and Diriyah to the mountains of Abha, the beaches of Jeddah, and the vibrant city of Riyadh, the application brings a variety of Saudi destinations together in one place.
+From the ancient heritage of AlUla to the mountains of Abha, the beaches of Jeddah, and the vibrant city of Riyadh, the application brings a variety of Saudi destinations together in one place.
 
 The app provides users with destination images, locations, descriptions, ratings, highlights, and travel information through a clean, modern, and responsive interface.
 
