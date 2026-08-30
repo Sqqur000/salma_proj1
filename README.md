@@ -9,6 +9,29 @@ The app provides users with destination images, locations, descriptions, ratings
 
 The goal of Explore Saudi is to make discovering Saudi Arabia simple, engaging, and accessible while showcasing the Kingdom's rich culture, history, nature, and tourism experiences.
 
+ # Widgets Used
+
+- Column
+- Row
+- ListView / SingleChildScrollView
+- AppBar
+- InkWell
+- GestureDetector
+- Container
+- SizedBox
+- Image
+- Text
+- Icon
+- MediaQuery
+- Navigator
+- Scaffold
+- Stack
+- Padding
+- Expanded
+- SafeArea
+- StatefulWidget
+- setState
+
 Home Screen
 
 <img width="316" height="642" alt="Home Screen 1" src="https://github.com/user-attachments/assets/5a48cb6b-7ff8-4a6d-a1c9-db0cf96281c8" /> <img width="314" height="641" alt="Home Screen 2" src="https://github.com/user-attachments/assets/c19fc74e-3fb4-4b25-93fd-a17c8de88fa0" />
