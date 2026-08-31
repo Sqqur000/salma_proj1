@@ -1,41 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../models/destinations_model.dart';
 
 class AlulaScreen extends StatefulWidget {
-  const AlulaScreen({super.key});
+  final DestinationsModel destination;
+
+  const AlulaScreen({
+    super.key,
+    required this.destination,
+  });
 
   @override
-  State<AlulaScreen> createState() => _AlulaScreenState();
+  State<AlulaScreen> createState() =>
+      _AlulaScreenState();
 }
 
-class _AlulaScreenState extends State<AlulaScreen> {
+class _AlulaScreenState
+    extends State<AlulaScreen> {
   bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
+    final mediaQuery =
+        MediaQuery.of(context);
 
-    final screenWidth = mediaQuery.size.width;
-    final screenHeight = mediaQuery.size.height;
-    final scale = (screenWidth / 390).clamp(0.82, 1.10).toDouble();
+    final screenWidth =
+        mediaQuery.size.width;
 
-    final imageHeight = screenHeight < 700 ? 340 * scale : 400 * scale;
+    final screenHeight =
+        mediaQuery.size.height;
 
-    final cardPadding = 21 * scale;
+    final scale =
+        (screenWidth / 390)
+            .clamp(0.82, 1.10)
+            .toDouble();
 
-    final titleSize = 36 * scale;
+    final imageHeight =
+        screenHeight < 700
+            ? 340 * scale
+            : 400 * scale;
 
-    final bodySize = 13.5 * scale;
+    final cardPadding =
+        21 * scale;
+
+    final titleSize =
+        36 * scale;
+
+    final bodySize =
+        13.5 * scale;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5EFE6),
+      backgroundColor:
+          const Color(0xFFF5EFE6),
 
       body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
+        child:
+            SingleChildScrollView(
+          physics:
+              const BouncingScrollPhysics(),
 
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment:
+                CrossAxisAlignment
+                    .stretch,
 
             children: [
               SizedBox(
@@ -46,22 +73,40 @@ class _AlulaScreenState extends State<AlulaScreen> {
                   children: [
                     Positioned.fill(
                       child: Image.asset(
-                        'assets/our-habitas-alula-al-ula-pic-32.jpg',
+                        widget.destination
+                            .detailImage,
+
                         fit: BoxFit.cover,
                       ),
                     ),
 
                     Positioned.fill(
                       child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
+                        decoration:
+                            BoxDecoration(
+                          gradient:
+                              LinearGradient(
+                            begin:
+                                Alignment
+                                    .topCenter,
+
+                            end:
+                                Alignment
+                                    .bottomCenter,
 
                             colors: [
-                              Colors.black.withOpacity(0.25),
-                              Colors.transparent,
-                              Colors.black.withOpacity(0.12),
+                              Colors.black
+                                  .withOpacity(
+                                0.25,
+                              ),
+
+                              Colors
+                                  .transparent,
+
+                              Colors.black
+                                  .withOpacity(
+                                0.12,
+                              ),
                             ],
                           ),
                         ),
@@ -72,13 +117,27 @@ class _AlulaScreenState extends State<AlulaScreen> {
                       top: 18 * scale,
                       left: 18 * scale,
 
-                      child: CircleButton(
-                        size: 50 * scale,
-                        icon: Icons.arrow_back,
-                        iconColor: Color.fromARGB(255, 1, 79, 3),
+                      child:
+                          CircleButton(
+                        size:
+                            50 * scale,
+
+                        icon:
+                            Icons.arrow_back,
+
+                        iconColor:
+                            const Color
+                                .fromARGB(
+                          255,
+                          1,
+                          79,
+                          3,
+                        ),
 
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.pop(
+                            context,
+                          );
                         },
                       ),
                     ),
@@ -87,20 +146,29 @@ class _AlulaScreenState extends State<AlulaScreen> {
                       top: 18 * scale,
                       right: 18 * scale,
 
-                      child: CircleButton(
-                        size: 50 * scale,
+                      child:
+                          CircleButton(
+                        size:
+                            50 * scale,
 
                         icon: isFavorite
                             ? Icons.favorite
-                            : Icons.favorite_border,
+                            : Icons
+                                .favorite_border,
 
-                        iconColor: isFavorite
-                            ? Color.fromARGB(255, 1, 79, 3)
-                            : Color.fromARGB(255, 1, 79, 3),
+                        iconColor:
+                            const Color
+                                .fromARGB(
+                          255,
+                          1,
+                          79,
+                          3,
+                        ),
 
                         onTap: () {
                           setState(() {
-                            isFavorite = !isFavorite;
+                            isFavorite =
+                                !isFavorite;
                           });
                         },
                       ),
@@ -112,74 +180,140 @@ class _AlulaScreenState extends State<AlulaScreen> {
               Container(
                 width: double.infinity,
 
-                padding: EdgeInsets.fromLTRB(
+                padding:
+                    EdgeInsets.fromLTRB(
                   cardPadding,
                   24 * scale,
                   cardPadding,
                   20 * scale,
                 ),
 
-                decoration: BoxDecoration(
-                  color:  Color(0xFFF5EFE6),
+                decoration:
+                    BoxDecoration(
+                  color:
+                      const Color(
+                    0xFFF5EFE6,
+                  ),
 
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.18),
-                      blurRadius: 20 * scale,
-                      offset: Offset(0, 8 * scale),
+                      color: Colors.black
+                          .withOpacity(
+                        0.18,
+                      ),
+
+                      blurRadius:
+                          20 * scale,
+
+                      offset: Offset(
+                        0,
+                        8 * scale,
+                      ),
                     ),
                   ],
                 ),
 
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment:
+                      CrossAxisAlignment
+                          .start,
 
                   children: [
                     Row(
                       children: [
                         Expanded(
                           child: Text(
-                            'AlUla',
+                            widget.destination
+                                .title,
 
-                            style: GoogleFonts.playfairDisplay(
-                              color: Color.fromARGB(255, 1, 79, 3),
-                              fontSize: titleSize,
-                              fontWeight: FontWeight.w600,
+                            style:
+                                GoogleFonts
+                                    .playfairDisplay(
+                              color:
+                                  const Color
+                                      .fromARGB(
+                                255,
+                                1,
+                                79,
+                                3,
+                              ),
+
+                              fontSize:
+                                  titleSize,
+
+                              fontWeight:
+                                  FontWeight
+                                      .w600,
                             ),
                           ),
                         ),
 
                         Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 11 * scale,
-                            vertical: 7 * scale,
+                          padding:
+                              EdgeInsets
+                                  .symmetric(
+                            horizontal:
+                                11 * scale,
+
+                            vertical:
+                                7 * scale,
                           ),
 
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF655D32),
+                          decoration:
+                              BoxDecoration(
+                            color:
+                                const Color(
+                              0xFF655D32,
+                            ),
 
-                            borderRadius: BorderRadius.circular(23 * scale),
+                            borderRadius:
+                                BorderRadius
+                                    .circular(
+                              23 * scale,
+                            ),
                           ),
 
                           child: Row(
-                            mainAxisSize: MainAxisSize.min,
+                            mainAxisSize:
+                                MainAxisSize
+                                    .min,
 
                             children: [
                               Icon(
                                 Icons.star,
-                                color: const Color(0xFFE0B85C),
-                                size: 16 * scale,
+
+                                color:
+                                    const Color(
+                                  0xFFE0B85C,
+                                ),
+
+                                size:
+                                    16 * scale,
                               ),
 
-                              SizedBox(width: 4 * scale),
+                              SizedBox(
+                                width:
+                                    4 * scale,
+                              ),
 
                               Text(
-                                '4.8',
+                                widget
+                                    .destination
+                                    .rating,
 
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 13 * scale,
-                                  fontWeight: FontWeight.bold,
+                                style:
+                                    GoogleFonts
+                                        .poppins(
+                                  color:
+                                      Colors
+                                          .white,
+
+                                  fontSize:
+                                      13 * scale,
+
+                                  fontWeight:
+                                      FontWeight
+                                          .bold,
                                 ),
                               ),
                             ],
@@ -188,50 +322,88 @@ class _AlulaScreenState extends State<AlulaScreen> {
                       ],
                     ),
 
-                    SizedBox(height: 5 * scale),
+                    SizedBox(
+                      height: 5 * scale,
+                    ),
 
                     Row(
                       children: [
                         Icon(
-                          Icons.location_on_outlined,
-                          color: const Color(0xFFD4AA4F),
-                          size: 19 * scale,
+                          Icons
+                              .location_on_outlined,
+
+                          color:
+                              const Color(
+                            0xFFD4AA4F,
+                          ),
+
+                          size:
+                              19 * scale,
                         ),
 
-                        SizedBox(width: 5 * scale),
+                        SizedBox(
+                          width: 5 * scale,
+                        ),
 
-                        Text(
-                          'Al Madinah Region',
+                        Expanded(
+                          child: Text(
+                            widget
+                                .destination
+                                .location,
 
-                          style: GoogleFonts.poppins(
-                            color: Color.fromARGB(
-                              255,
-                              1,
-                              79,
-                              3,
-                            ).withOpacity(0.78),
-                            fontSize: 13 * scale,
+                            style:
+                                GoogleFonts
+                                    .poppins(
+                              color:
+                                  const Color
+                                      .fromARGB(
+                                255,
+                                1,
+                                79,
+                                3,
+                              ).withOpacity(
+                                0.78,
+                              ),
+
+                              fontSize:
+                                  13 * scale,
+                            ),
                           ),
                         ),
                       ],
                     ),
 
-                    SizedBox(height: 21 * scale),
+                    SizedBox(
+                      height: 21 * scale,
+                    ),
 
                     Text(
-                      "AlUla is one of Saudi Arabia's most "
-                      "breathtaking destinations, known for its "
-                      "ancient heritage, stunning rock formations, "
-                      "and rich cultural history.",
+                      widget.destination
+                          .fullDescription,
 
-                      style: GoogleFonts.poppins(
-                        color: Color.fromARGB(255, 1, 79, 3).withOpacity(0.87),
-                        fontSize: bodySize,
+                      style:
+                          GoogleFonts.poppins(
+                        color:
+                            const Color
+                                .fromARGB(
+                          255,
+                          1,
+                          79,
+                          3,
+                        ).withOpacity(
+                          0.87,
+                        ),
+
+                        fontSize:
+                            bodySize,
+
                         height: 1.55,
                       ),
                     ),
 
-                    SizedBox(height: 7 * scale),
+                    SizedBox(
+                      height: 7 * scale,
+                    ),
 
                     GestureDetector(
                       onTap: () {},
@@ -239,117 +411,174 @@ class _AlulaScreenState extends State<AlulaScreen> {
                       child: Text(
                         'Read more',
 
-                        style: GoogleFonts.poppins(
-                          color: const Color(0xFFD4AA4F),
-                          fontSize: 13 * scale,
-                          fontWeight: FontWeight.bold,
+                        style:
+                            GoogleFonts
+                                .poppins(
+                          color:
+                              const Color(
+                            0xFFD4AA4F,
+                          ),
+
+                          fontSize:
+                              13 * scale,
+
+                          fontWeight:
+                              FontWeight
+                                  .bold,
                         ),
                       ),
                     ),
 
-                    SizedBox(height: 27 * scale),
+                    SizedBox(
+                      height: 27 * scale,
+                    ),
 
                     Text(
                       'Highlights',
 
-                      style: GoogleFonts.poppins(
-                        color: Color.fromARGB(255, 1, 79, 3),
-                        fontSize: 17 * scale,
-                        fontWeight: FontWeight.bold,
+                      style:
+                          GoogleFonts.poppins(
+                        color:
+                            const Color
+                                .fromARGB(
+                          255,
+                          1,
+                          79,
+                          3,
+                        ),
+
+                        fontSize:
+                            17 * scale,
+
+                        fontWeight:
+                            FontWeight
+                                .bold,
                       ),
                     ),
 
-                    SizedBox(height: 14 * scale),
+                    SizedBox(
+                      height: 14 * scale,
+                    ),
 
                     Row(
                       children: [
-                        Expanded(
-                          child: HighlightItem(
-                            scale: scale,
-                            icon: Icons.account_balance_outlined,
-                            title: 'Heritage',
-                            subtitle: 'Sites',
+                        for (var highlight
+                            in widget
+                                .destination
+                                .highlights)
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  EdgeInsets
+                                      .symmetric(
+                                horizontal:
+                                    3.5 *
+                                        scale,
+                              ),
+
+                              child:
+                                  HighlightItem(
+                                scale:
+                                    scale,
+
+                                icon:
+                                    Icons
+                                        .star_outline,
+
+                                title:
+                                    highlight[
+                                            'title'] ??
+                                        '',
+
+                                subtitle:
+                                    highlight[
+                                            'subtitle'] ??
+                                        '',
+                              ),
+                            ),
                           ),
-                        ),
-
-                        SizedBox(width: 7 * scale),
-
-                        Expanded(
-                          child: HighlightItem(
-                            scale: scale,
-                            icon: Icons.landscape_outlined,
-                            title: 'Desert',
-                            subtitle: 'Adventures',
-                          ),
-                        ),
-
-                        SizedBox(width: 7 * scale),
-
-                        Expanded(
-                          child: HighlightItem(
-                            scale: scale,
-                            icon: Icons.museum_outlined,
-                            title: 'Local',
-                            subtitle: 'Culture',
-                          ),
-                        ),
-
-                        SizedBox(width: 7 * scale),
-
-                        Expanded(
-                          child: HighlightItem(
-                            scale: scale,
-                            icon: Icons.camera_alt_outlined,
-                            title: 'Photography',
-                            subtitle: 'Spots',
-                          ),
-                        ),
                       ],
                     ),
 
-                    SizedBox(height: 25 * scale),
+                    SizedBox(
+                      height: 25 * scale,
+                    ),
 
                     Container(
-                      width: double.infinity,
+                      width:
+                          double.infinity,
 
-                      padding: EdgeInsets.all(7 * scale),
+                      padding:
+                          EdgeInsets.all(
+                        7 * scale,
+                      ),
 
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF174D3B),
+                      decoration:
+                          BoxDecoration(
+                        color:
+                            const Color(
+                          0xFF174D3B,
+                        ),
 
-                        borderRadius: BorderRadius.circular(28 * scale),
+                        borderRadius:
+                            BorderRadius
+                                .circular(
+                          28 * scale,
+                        ),
                       ),
 
                       child: Row(
                         children: [
-                          // PRICE
                           Padding(
-                            padding: EdgeInsets.only(
-                              left: 11 * scale,
-                              top: 2 * scale,
-                              bottom: 2 * scale,
+                            padding:
+                                EdgeInsets
+                                    .only(
+                              left:
+                                  11 * scale,
+                              top:
+                                  2 * scale,
+                              bottom:
+                                  2 * scale,
                             ),
 
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment:
+                                  CrossAxisAlignment
+                                      .start,
 
                               children: [
                                 Text(
                                   'From',
 
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white70,
-                                    fontSize: 11 * scale,
+                                  style:
+                                      GoogleFonts
+                                          .poppins(
+                                    color:
+                                        Colors
+                                            .white70,
+
+                                    fontSize:
+                                        11 * scale,
                                   ),
                                 ),
 
                                 Text(
-                                  'SAR 450',
+                                  widget
+                                      .destination
+                                      .price,
 
-                                  style: GoogleFonts.playfairDisplay(
-                                    color: Colors.white,
-                                    fontSize: 20 * scale,
-                                    fontWeight: FontWeight.w600,
+                                  style: GoogleFonts
+                                      .playfairDisplay(
+                                    color:
+                                        Colors
+                                            .white,
+
+                                    fontSize:
+                                        20 * scale,
+
+                                    fontWeight:
+                                        FontWeight
+                                            .w600,
                                   ),
                                 ),
                               ],
@@ -358,48 +587,87 @@ class _AlulaScreenState extends State<AlulaScreen> {
 
                           const Spacer(),
 
-                          // BOOK NOW
                           GestureDetector(
                             onTap: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Booking AlUla...'),
+                              ScaffoldMessenger
+                                  .of(
+                                context,
+                              )
+                                  .showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text(
+                                    'Booking ${widget.destination.title}...',
+                                  ),
                                 ),
                               );
                             },
 
                             child: Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20 * scale,
-                                vertical: 14 * scale,
+                              padding:
+                                  EdgeInsets
+                                      .symmetric(
+                                horizontal:
+                                    20 * scale,
+
+                                vertical:
+                                    14 * scale,
                               ),
 
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFD0A84F),
+                              decoration:
+                                  BoxDecoration(
+                                color:
+                                    const Color(
+                                  0xFFD0A84F,
+                                ),
 
-                                borderRadius: BorderRadius.circular(26 * scale),
+                                borderRadius:
+                                    BorderRadius
+                                        .circular(
+                                  26 * scale,
+                                ),
                               ),
 
                               child: Row(
-                                mainAxisSize: MainAxisSize.min,
+                                mainAxisSize:
+                                    MainAxisSize
+                                        .min,
 
                                 children: [
                                   Text(
                                     'Book Now',
 
-                                    style: GoogleFonts.poppins(
-                                      color: Colors.white,
-                                      fontSize: 13 * scale,
-                                      fontWeight: FontWeight.bold,
+                                    style:
+                                        GoogleFonts
+                                            .poppins(
+                                      color:
+                                          Colors
+                                              .white,
+
+                                      fontSize:
+                                          13 * scale,
+
+                                      fontWeight:
+                                          FontWeight
+                                              .bold,
                                     ),
                                   ),
 
-                                  SizedBox(width: 6 * scale),
+                                  SizedBox(
+                                    width:
+                                        6 * scale,
+                                  ),
 
                                   Icon(
-                                    Icons.arrow_forward,
-                                    color: Colors.white,
-                                    size: 18 * scale,
+                                    Icons
+                                        .arrow_forward,
+
+                                    color:
+                                        Colors
+                                            .white,
+
+                                    size:
+                                        18 * scale,
                                   ),
                                 ],
                               ),
@@ -419,7 +687,8 @@ class _AlulaScreenState extends State<AlulaScreen> {
   }
 }
 
-class CircleButton extends StatelessWidget {
+class CircleButton
+    extends StatelessWidget {
   final double size;
   final IconData icon;
   final Color iconColor;
@@ -430,7 +699,8 @@ class CircleButton extends StatelessWidget {
     required this.size,
     required this.icon,
     required this.onTap,
-    this.iconColor = const Color(0xFF222222),
+    this.iconColor =
+        const Color(0xFF222222),
   });
 
   @override
@@ -439,7 +709,10 @@ class CircleButton extends StatelessWidget {
       color: Colors.transparent,
 
       child: InkWell(
-        borderRadius: BorderRadius.circular(size / 2),
+        borderRadius:
+            BorderRadius.circular(
+          size / 2,
+        ),
 
         onTap: onTap,
 
@@ -447,20 +720,30 @@ class CircleButton extends StatelessWidget {
           width: size,
           height: size,
 
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.93),
+          decoration:
+              BoxDecoration(
+            color: Colors.white
+                .withOpacity(0.93),
 
             shape: BoxShape.circle,
           ),
 
-          child: Icon(icon, color: iconColor, size: size * 0.46),
+          child: Icon(
+            icon,
+
+            color: iconColor,
+
+            size:
+                size * 0.46,
+          ),
         ),
       ),
     );
   }
 }
 
-class HighlightItem extends StatelessWidget {
+class HighlightItem
+    extends StatelessWidget {
   final double scale;
   final IconData icon;
   final String title;
@@ -479,48 +762,82 @@ class HighlightItem extends StatelessWidget {
     return Container(
       height: 105 * scale,
 
-      decoration: BoxDecoration(
-        color: const Color(0xFF104936),
+      decoration:
+          BoxDecoration(
+        color:
+            const Color(0xFF104936),
 
-        borderRadius: BorderRadius.circular(18 * scale),
+        borderRadius:
+            BorderRadius.circular(
+          18 * scale,
+        ),
       ),
 
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment:
+            MainAxisAlignment
+                .center,
 
         children: [
-          Icon(icon, color: const Color(0xFFD4AA4F), size: 25 * scale),
+          Icon(
+            icon,
 
-          SizedBox(height: 7 * scale),
+            color:
+                const Color(
+              0xFFD4AA4F,
+            ),
+
+            size: 25 * scale,
+          ),
+
+          SizedBox(
+            height: 7 * scale,
+          ),
 
           FittedBox(
-            fit: BoxFit.scaleDown,
+            fit:
+                BoxFit.scaleDown,
 
             child: Text(
               title,
 
-              textAlign: TextAlign.center,
+              textAlign:
+                  TextAlign.center,
 
-              style: GoogleFonts.poppins(
-                color: Colors.white,
-                fontSize: 10 * scale,
-                fontWeight: FontWeight.w500,
+              style:
+                  GoogleFonts.poppins(
+                color:
+                    Colors.white,
+
+                fontSize:
+                    10 * scale,
+
+                fontWeight:
+                    FontWeight.w500,
               ),
             ),
           ),
 
           FittedBox(
-            fit: BoxFit.scaleDown,
+            fit:
+                BoxFit.scaleDown,
 
             child: Text(
               subtitle,
 
-              textAlign: TextAlign.center,
+              textAlign:
+                  TextAlign.center,
 
-              style: GoogleFonts.poppins(
-                color: Colors.white,
-                fontSize: 10 * scale,
-                fontWeight: FontWeight.w500,
+              style:
+                  GoogleFonts.poppins(
+                color:
+                    Colors.white,
+
+                fontSize:
+                    10 * scale,
+
+                fontWeight:
+                    FontWeight.w500,
               ),
             ),
           ),
