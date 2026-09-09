@@ -7,7 +7,7 @@ void main() async{
 
   await Supabase.initialize(
     url: 'https://fxfjpgembctxczacvzyp.supabase.co',
-    publishableKey: 'sb_publishable_lEi6HRFjhv4GZVFKocONUg_bYUW6sDE',
+    publishableKey: 'my key',
   );
   runApp(const MainApp());
 }
