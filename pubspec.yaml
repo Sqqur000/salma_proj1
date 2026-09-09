@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_dotenv: ^6.0.1
   google_fonts: ^8.2.1
   supabase_flutter: ^2.17.2
 
@@ -20,12 +21,14 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  assets:
+  assets:   
+    - .env
     - assets/saFlag.png
     - assets/360_F_546176788_hK2bMAyjAYfkW6l37MynkXedIJ8NDNDl.jpg
     - assets/jeddah-corniche-red-sea-saudi-arabia-d6ub_b.jpeg
     - assets/our-habitas-alula-al-ula-pic-32.jpg
     - assets/Kingdom-Centre-Riyadh-Saudi-Arabia.webp
     - assets/b220510003___banner-size_1606_786.jpg
+    
     
 
