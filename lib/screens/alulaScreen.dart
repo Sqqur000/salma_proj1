@@ -299,7 +299,7 @@ class _AlulaScreenState
                               Text(
                                 widget
                                     .destination
-                                    .rating,
+                                    .rating.toString(),
 
                                 style:
                                     GoogleFonts
@@ -565,7 +565,7 @@ class _AlulaScreenState
                                 Text(
                                   widget
                                       .destination
-                                      .price,
+                                      .price.toString(),
 
                                   style: GoogleFonts
                                       .playfairDisplay(

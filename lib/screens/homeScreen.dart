@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../data/destinations.dart';
 import '../models/destinations_model.dart';
 import 'alulaScreen.dart';
+import '../service/database.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,19 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<DestinationsModel> destinations = [];
 
-  void getData() {
-    for (var destination in destinationData) {
-      destinations.add(
-        DestinationsModel.fromJson(destination),
-      );
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -100,265 +88,57 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
 
-      body: ListView.builder(
-        physics: const BouncingScrollPhysics(),
+      body: FutureBuilder<List<DestinationsModel>>(
+  future: Database().getAllDestinations(),
+  builder: (context, snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
 
-        padding: EdgeInsets.symmetric(
-          horizontal: horizontalPadding,
+    if (snapshot.hasError) {
+      return Center(
+        child: Text(
+          'ERROR:\n${snapshot.error}',
+          textAlign: TextAlign.center,
         ),
+      );
+    }
 
-        itemCount: destinations.length + 3,
+    if (!snapshot.hasData) {
+      return const Center(
+        child: Text('No data'),
+      );
+    }
 
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return SizedBox(
-              height: topSpace,
-            );
-          }
+    if (snapshot.data!.isEmpty) {
+      return const Center(
+        child: Text('Supabase returned 0 rows'),
+      );
+    }
 
-          if (index == 1) {
-            return Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start,
+    final destinations = snapshot.data!;
 
-              children: [
-                Text(
-                  "Explore\nSaudi Arabia",
-
-                  style:
-                      GoogleFonts.playfairDisplay(
-                    fontSize: titleSize,
-                    fontWeight:
-                        FontWeight.bold,
-                    color:
-                        const Color.fromARGB(
-                      255,
-                      1,
-                      79,
-                      3,
-                    ),
-                  ),
-                ),
-
-                SizedBox(
-                  height: 8 * scale,
-                ),
-
-                Text(
-                  "Discover the beauty, culture and heritage of\n"
-                  "our amazing country.",
-
-                  style: GoogleFonts.poppins(
-                    fontSize: subtitleSize,
-                    fontWeight:
-                        FontWeight.w500,
-                    color: Colors.grey,
-                    height: 1.4,
-                  ),
-                ),
-
-                SizedBox(
-                  height: 22 * scale,
-                ),
-
-                Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment
-                          .spaceBetween,
-
-                  children: [
-                    Text(
-                      "Popular Destinations",
-
-                      style:
-                          GoogleFonts.poppins(
-                        fontSize:
-                            sectionTitleSize,
-                        fontWeight:
-                            FontWeight.bold,
-                        color:
-                            const Color.fromARGB(
-                          255,
-                          1,
-                          79,
-                          3,
-                        ),
-                      ),
-                    ),
-
-                    Text(
-                      "See all",
-
-                      style:
-                          GoogleFonts.poppins(
-                        fontSize:
-                            14 * scale,
-                        fontWeight:
-                            FontWeight.bold,
-                        color:
-                            const Color.fromARGB(
-                          255,
-                          1,
-                          79,
-                          3,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-                SizedBox(
-                  height: 18 * scale,
-                ),
-              ],
-            );
-          }
-
-          if (index >= 2 &&
-              index <
-                  destinations.length + 2) {
-            final destination =
-                destinations[index - 2];
-
-            return DestinationCard(
-              destination: destination,
-              scale: scale,
-              imageWidth: imageWidth,
-              imageHeight: imageHeight,
-            );
-          }
-
-          return SizedBox(
-            height: 20 * scale,
-          );
-        },
+    return ListView.builder(
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding,
+        vertical: topSpace,
       ),
+      itemCount: destinations.length,
+      itemBuilder: (context, index) {
+        final destination = destinations[index];
 
-      bottomNavigationBar:
-          NavigationBar(
-        backgroundColor: Colors.white,
-
-        height: 70 * scale,
-
-        indicatorColor:
-            const Color.fromARGB(
-          255,
-          154,
-          191,
-          155,
-        ),
-
-        selectedIndex: 0,
-
-        onDestinationSelected:
-            (int index) {},
-
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(
-              Icons.home_outlined,
-              color:
-                  Color.fromARGB(
-                255,
-                0,
-                76,
-                4,
-              ),
-            ),
-
-            selectedIcon: Icon(
-              Icons.home,
-              color:
-                  Color.fromARGB(
-                255,
-                0,
-                76,
-                4,
-              ),
-            ),
-
-            label: 'Home',
-          ),
-
-          NavigationDestination(
-            icon: Icon(
-              Icons.explore_outlined,
-              color:
-                  Color.fromARGB(
-                255,
-                0,
-                76,
-                4,
-              ),
-            ),
-
-            selectedIcon: Icon(
-              Icons.explore,
-              color:
-                  Color.fromARGB(
-                255,
-                0,
-                76,
-                4,
-              ),
-            ),
-
-            label: 'Explore',
-          ),
-
-          NavigationDestination(
-            icon: Icon(
-              Icons.favorite_border,
-              color:
-                  Color.fromARGB(
-                255,
-                0,
-                76,
-                4,
-              ),
-            ),
-
-            selectedIcon: Icon(
-              Icons.favorite,
-              color:
-                  Color.fromARGB(
-                255,
-                0,
-                76,
-                4,
-              ),
-            ),
-
-            label: 'Favorites',
-          ),
-
-          NavigationDestination(
-            icon: Icon(
-              Icons.person_outline,
-              color:
-                  Color.fromARGB(
-                255,
-                0,
-                76,
-                4,
-              ),
-            ),
-
-            selectedIcon: Icon(
-              Icons.person,
-              color:
-                  Color.fromARGB(
-                255,
-                0,
-                76,
-                4,
-              ),
-            ),
-
-            label: 'Profile',
-          ),
-        ],
-      ),
+        return DestinationCard(
+          destination: destination,
+          scale: scale,
+          imageWidth: imageWidth,
+          imageHeight: imageHeight,
+        );
+      },
+    );
+  },
+),
     );
   }
 }

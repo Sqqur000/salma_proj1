@@ -5,8 +5,8 @@ class DestinationsModel {
   String detailImage;
   String description;
   String fullDescription;
-  String rating;
-  String price;
+  double rating;
+double price;
   bool enabled;
   List<Map<String, String>> highlights;
 
@@ -23,25 +23,25 @@ class DestinationsModel {
     required this.highlights,
   });
 
-  factory DestinationsModel.fromJson(
-    Map<String, dynamic> json,
-  ) {
+  factory DestinationsModel.fromJson(Map<String, dynamic> json) {
     return DestinationsModel(
-      title: json['title'],
-      location: json['location'],
-      image: json['image'],
-      detailImage: json['detailImage'],
-      description: json['description'],
-      fullDescription: json['fullDescription'],
-      rating: json['rating'],
-      price: json['price'],
-      enabled: json['enabled'],
-      highlights: List<Map<String, String>>.from(
-        json['highlights'].map(
-          (highlight) =>
-              Map<String, String>.from(highlight),
-        ),
-      ),
+      title: json['title'] ?? '',
+      location: json['location'] ?? '',
+      image: json['image'] ?? '',
+      detailImage: json['detail_image'] ?? '',
+      description: json['description'] ?? '',
+      fullDescription: json['full_description'] ?? '',
+      rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
+price: (json['price'] as num?)?.toDouble() ?? 0.0,
+      enabled: json['enabled'] ?? false,
+
+      highlights: json['highlights'] != null
+          ? List<Map<String, String>>.from(
+              (json['highlights'] as List).map(
+                (highlight) => Map<String, String>.from(highlight),
+              ),
+            )
+          : [],
     );
   }
 }
